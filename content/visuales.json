@@ -1,0 +1,96 @@
+{
+  "figures": [
+    {
+      "title": "Todo el parque de viviendas en mil puntos",
+      "file": "01_parque_mil_puntos.png",
+      "width": 1344,
+      "height": 1018
+    },
+    {
+      "title": "Quién es dueño de las viviendas en España",
+      "file": "02_puntos_por_grupo.png",
+      "width": 1344,
+      "height": 1688
+    },
+    {
+      "title": "Las viviendas por tipo y tamaño de titular, en porcentaje",
+      "file": "03_sectores.png",
+      "width": 1344,
+      "height": 2586
+    },
+    {
+      "title": "Personas y empresas con más de una vivienda",
+      "file": "04_personas_empresas_tramos.png",
+      "width": 1344,
+      "height": 1374
+    },
+    {
+      "title": "Viviendas de los titulares con más de una, por grupo y tramo",
+      "file": "05_multipropietarios_subgrupos.png",
+      "width": 1344,
+      "height": 1840
+    },
+    {
+      "title": "Viviendas de los titulares con más de una, con el tramo 2–5 desglosado",
+      "file": "06_desglose_2a5.png",
+      "width": 1344,
+      "height": 2344
+    },
+    {
+      "title": "Viviendas de multipropietarios en tres bloques",
+      "file": "07_tres_bloques.png",
+      "width": 1344,
+      "height": 1250
+    },
+    {
+      "title": "Todas las viviendas en cuatro bloques de titulares",
+      "file": "08_cuatro_bloques.png",
+      "width": 1344,
+      "height": 1464
+    },
+    {
+      "title": "El alquiler habitual en cuatro bloques de arrendadores",
+      "file": "09_alquiler_cuatro_bloques.png",
+      "width": 1344,
+      "height": 1084
+    },
+    {
+      "title": "El alquiler habitual sin los caseros de un solo piso",
+      "file": "10_alquiler_tres_bloques.png",
+      "width": 1344,
+      "height": 1084
+    },
+    {
+      "title": "Los multiarrendadores dominan el alquiler particular en las ciudades más caras",
+      "file": "11_multiarrendadores_ciudades.png",
+      "width": 1344,
+      "height": 774
+    },
+    {
+      "title": "Cuatro comunidades concentran la mayor parte de los hogares nuevos hasta 2041",
+      "file": "12_hogares_ccaa.png",
+      "width": 1344,
+      "height": 1092
+    }
+  ],
+  "tables": [
+    "Fuentes principales y qué miden",
+    "Parque, hogares y tenencia",
+    "Viviendas y titulares por tramo y tipo de titular",
+    "Dentro del tramo de 2 a 5 viviendas (estimación)",
+    "Arrendadores particulares por tamaño de cartera (2024)",
+    "Distribución territorial",
+    "Concentración de la propiedad por comunidad",
+    "Vivienda turística",
+    "Alquiler de vivienda habitual y de temporada: salvaguardas",
+    "Vivienda vacía",
+    "Vivienda vacía por tamaño de municipio",
+    "Población, hogares y construcción",
+    "Oferta",
+    "Estimación del déficit",
+    "Precios, esfuerzo y vulnerabilidad",
+    "Contexto político",
+    "Discursos y argumentos",
+    "Qué dato contrasta cada argumento"
+  ]
+}
