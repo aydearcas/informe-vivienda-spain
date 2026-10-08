@@ -1,0 +1,18 @@
+{
+  "name": "informe-vivienda-spain",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22.12.0" },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "node scripts/sync-download.mjs && astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "preview:pages": "node scripts/preview-pages.mjs",
+    "verify": "node scripts/verify.mjs"
+  },
+  "dependencies": {
+    "astro": "7.3.8",
+    "marked": "15.0.12"
+  }
+}
