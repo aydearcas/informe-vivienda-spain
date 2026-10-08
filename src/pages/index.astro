@@ -1,0 +1,72 @@
+---
+import { renderReport } from '../lib/report.mjs';
+import '../styles/global.css';
+const report = renderReport(import.meta.env.BASE_URL);
+const { title, date, sections, figures, tables, asset } = report;
+const canonical = Astro.site ? new URL(import.meta.env.BASE_URL, Astro.site).href : undefined;
+const chapterCount = sections.filter((section) => /^\d+\./.test(section.title)).length;
+const description = 'Un informe sobre la vivienda en España: propiedad, alquiler, usos del parque residencial, diferencias territoriales y dificultades de acceso.';
+---
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f8f4ed" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="article" />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    <link rel="icon" type="image/svg+xml" href={asset('favicon.svg')} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#informe">Saltar al informe</a>
+    <header class="site-header">
+      <a class="brand" href="#inicio" aria-label="Vivienda en España, inicio">
+        <svg width="24" height="26" viewBox="0 0 24 26" fill="none" aria-hidden="true"><path d="M3 23V10l9-7 9 7v13H3Z" stroke="currentColor" stroke-width="1.5"/><path d="M9 23v-8h6v8M7 10h3m4 0h3" stroke="currentColor" stroke-width="1.5"/></svg>
+        <span>Vivienda <span class="brand-light">en España</span></span>
+      </a>
+      <nav class="header-links" aria-label="Accesos principales"><a href="#introducción">Informe</a><a href="#indice-de-figuras-y-tablas">Figuras y tablas</a><a href="#fuentes">Fuentes</a></nav>
+      <a class="header-download" href={asset('descargas/informe.pdf')} download><span>Descargar PDF</span><svg width="17" height="17" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 2v11m-4-4 4 4 4-4M3 14v3h14v-3" stroke="currentColor" stroke-width="1.5"/></svg></a>
+      <button class="menu-toggle" aria-controls="reader-sidebar" aria-expanded="false" aria-label="Abrir índice"><span aria-hidden="true">☰</span></button>
+      <div class="reading-progress" aria-hidden="true"><span></span></div>
+    </header>
+    <section class="hero" id="inicio" aria-labelledby="report-title">
+      <div class="hero-inner">
+        <div class="hero-text"><p class="eyebrow"><span class="edition-line"></span> Informe · {date}</p><h1 id="report-title">Vivienda en España<span>Datos, debates<br />y discursos.</span></h1><p class="hero-description">{description}</p><div class="hero-actions"><a class="button button-dark" href="#resumen">Leer el informe <span aria-hidden="true">↘</span></a><a class="text-button" href={asset('descargas/informe.pdf')} download>Descargar PDF <span aria-hidden="true">↓</span></a></div></div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 440 420" fill="none"><defs><pattern id="plan-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" stroke="#582e22" stroke-opacity=".1" stroke-width=".6"/></pattern></defs><rect x="0" y="0" width="440" height="420" fill="url(#plan-grid)"/><g stroke="#623729" stroke-width="1.4"><path d="m58 352 157-88 157 88-157 88Z"/><path d="M58 352V167l157-88 157 88v185M215 79v185M58 167l157 88 157-88M215 255v185"/><path d="M88 334V183l101 57v151M241 391V241l101-57v151M88 218l101 57M88 263l101 57M88 308l101 57M241 276l101-57M241 321l101-57M241 366l101-57"/><path d="M119 201v150M155 221v150M275 221v150M309 201v150"/><path d="m112 137 103-58 103 58-103 58Z"/></g><path d="m241 276 33-19v45l-33 19Z" fill="#623729" fill-opacity=".6"/><path d="m155 266 34 19v45l-34-19Z" fill="#f8f4ed" fill-opacity=".8"/><path d="m275 221 34-19v45l-34 19Z" fill="#f8f4ed" fill-opacity=".7"/><path d="M30 355h370M215 25v380" stroke="#623729" stroke-opacity=".35" stroke-dasharray="4 6"/><circle cx="215" cy="79" r="3.5" fill="#623729"/><circle cx="58" cy="352" r="3.5" fill="#623729"/><circle cx="372" cy="352" r="3.5" fill="#623729"/></svg>
+          <span class="art-label">Cantidad · Distribución · Uso · Asequibilidad</span>
+        </div>
+      </div>
+      <div class="hero-meta"><span>Una lectura del acceso a la vivienda</span><div><span>{chapterCount} capítulos</span><span>{figures.length} figuras</span><span>{tables.length} tablas</span></div></div>
+    </section>
+    <div class="reader-layout">
+      <aside class="reader-sidebar" id="reader-sidebar" aria-label="Índice del informe">
+        <div class="sidebar-top"><span class="eyebrow">Contenido</span><button class="menu-close" aria-label="Cerrar índice">×</button></div>
+        <nav aria-label="Capítulos"><ol>{sections.map((section) => { const match = section.title.match(/^(\d+)\.\s*(.*)$/); return <li><a href={'#' + section.id} class="chapter-nav"><span class="chapter-number">{match ? match[1].padStart(2, '0') : '—'}</span><span>{match ? match[2] : section.title}</span></a></li>; })}</ol></nav>
+        <div class="sidebar-extra"><a href="#indice-de-figuras-y-tablas">Índice de figuras y tablas <span aria-hidden="true">↗</span></a><a href={asset('descargas/informe.md')} download>Descargar Markdown <span aria-hidden="true">↓</span></a></div>
+        <p class="sidebar-date">Fecha de corte<br /><strong>{date}</strong></p>
+      </aside>
+      <main id="informe" class="report" tabindex="-1">
+        <div class="reader-toolbar"><span>Edición web · Informe completo</span><button id="print-report" class="print-button" hidden>Imprimir <span aria-hidden="true">↗</span></button></div>
+        {sections.map((section, index) => <>
+          {index === 1 && <section id="indice-de-figuras-y-tablas" class="visual-index" aria-labelledby="visual-index-title"><p class="eyebrow">Consulta visual</p><h2 id="visual-index-title">Índice de figuras y tablas</h2><div class="index-columns"><details><summary>Figuras <span>{figures.length}</span></summary><ol>{figures.map((figure) => <li><a href={'#' + figure.id}><span>{String(figure.number).padStart(2, '0')}</span>{figure.title}</a></li>)}</ol></details><details><summary>Tablas <span>{tables.length}</span></summary><ol>{tables.map((table) => <li><a href={'#' + table.id}><span>{String(table.number).padStart(2, '0')}</span>{table.title}</a></li>)}</ol></details></div></section>}
+          <section class:list={['report-section', { 'report-summary': section.id === 'resumen', 'sources-section': section.id === 'fuentes' }]} id={section.id} aria-labelledby={section.id + '-heading'}>
+            <div class="section-heading"><h2 id={section.id + '-heading'}>{section.title}</h2><a class="heading-link" href={'#' + section.id} aria-label={'Enlace a ' + section.title}>#</a></div>
+            <div class="prose" set:html={section.html} />
+          </section>
+        </>)}
+        <div class="report-end"><span class="end-mark" aria-hidden="true">◇</span><p>Vivienda en España: datos, debates y discursos</p><a href={asset('descargas/informe.pdf')} download>Descargar el informe en PDF <span aria-hidden="true">↓</span></a></div>
+      </main>
+    </div>
+    <footer class="site-footer"><span>Vivienda en España · {date}</span><a href="#inicio">Volver al inicio <span aria-hidden="true">↑</span></a></footer>
+    <dialog id="figure-dialog" aria-labelledby="dialog-title"><div class="dialog-bar"><h2 id="dialog-title"></h2><div><button id="figure-zoom" aria-pressed="false">Tamaño original</button><button id="figure-close" aria-label="Cerrar gráfico">Cerrar <span aria-hidden="true">×</span></button></div></div><div class="dialog-image"><img id="dialog-img" alt="" /></div><p class="dialog-caption"></p></dialog>
+    <script>
+      import '../scripts/reader.js';
+    </script>
+  </body>
+</html>
